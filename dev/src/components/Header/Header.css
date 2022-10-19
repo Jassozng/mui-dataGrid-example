@@ -1,0 +1,19 @@
+header { 
+    display: flex;
+    text-align: center;
+    color: #ffff;
+    min-height: 2rem;
+    font-family: monospace;
+    background-color: #36494E;
+    justify-content: space-between;
+    min-width: -webkit-fill-available;
+    min-width: -moz-fill-available;
+}
+
+header svg {
+    padding: 1rem 1rem 0 0;
+}
+
+h1 {
+    margin-left: 1rem;
+}
