@@ -1,0 +1,9 @@
+.action-input {
+    width: 2rem;
+}
+
+.action-pad {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

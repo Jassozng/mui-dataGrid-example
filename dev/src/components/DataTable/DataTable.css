@@ -5,7 +5,13 @@
     height: 35rem;
     width: 80%;
     margin: 3rem;
-    background-color: #597081;
+    gap: 1rem;   
+}
+
+.top-table-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .even {
@@ -15,4 +21,12 @@
 .MuiDataGrid-cellContent {
     font-size: 1rem;
     font-weight: bold;
+}
+
+.MuiDataGrid-root {
+    background-color: #597081;
+}
+
+.textField{
+    max-width: 75%;
 }

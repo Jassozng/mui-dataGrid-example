@@ -3,7 +3,7 @@ import './Footer.css'
 
 const Footer = () => {
   return (
-    <footer>MUI DataGrid Example App - <a href="https://jassozng.dev" target="_blank">Jassozng.dev</a></footer>
+    <footer>MUI DataGrid Example App - <a href="https://jassozng.dev" target="_blank" rel="noreferrer">Jassozng.dev</a></footer>
   )
 }
 
