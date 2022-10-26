@@ -1,15 +1,20 @@
-import { newRegister, updateRegister, deleteRegister, sentToReviewRegister } from './actions.js'
+import { fetchData, newRegister, updateRegister, deleteRegister, sentToReviewRegister } from './actions.js'
 
 const tableActionReducer = (state, action) => {
-    const posibleActions = 
-    {
-        "NEW_REGISTER": () => { newRegister(state, action.payload) },
-        "UPDATE_REGISTER": () => { updateRegister(state, action.payload) },
-        "DELETE_REGISTER": () => { deleteRegister(state, action.payload) },
-        "SEND_TO_REVIEW": () => { sentToReviewRegister(state, action.payload) }
+    switch(action.type){
+        case "FETCH_DATA":
+            return fetchData(action.payload);
+        case "NEW_REGISTER":
+            return newRegister(state, action.payload);
+        case "UPDATE_REGISTER":
+            return updateRegister(state, action.payload, action.update_field_id);
+        case "DELETE_REGISTER":
+            return deleteRegister(state, action.update_field_id);
+        case "SEND_TO_REVIEW":
+            return sentToReviewRegister(state, action.update_field_id);
+        default:
+            return state;
     }
-
-    return posibleActions[action.type]
 }
 
 export default tableActionReducer;

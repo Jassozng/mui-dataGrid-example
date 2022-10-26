@@ -1,46 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
+import check from '../../assets/check.svg'
+import cross from '../../assets/cross.svg'
+import handleSubmit from './hooks/submitForm'
 import './ModalForm.css'
 
-const ModalForm = ({ formType }) => {
+const ModalForm = ({ formType, setModal, dispatch, fieldId }) => {
+
   return (
-    <form>
+    <form onSubmit={ (event) => { handleSubmit(event, setModal, formType, dispatch, fieldId) } }>
         { 
-            formType === "COURSE_PROPS_FORM" ? 
-            <>
-                <h1>Actions to realize</h1>
-                <label htmlFor="imageUrl">Image URL</label>
-                <input type="text" id="imageUrl" name="imageUrl" className="form-input" required={ true } />
-                <label htmlFor="id">ID</label>
-                <input type="text" id="id" name="id" className="form-input" required={ true } />
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" className="form-input" required={ true } />
-                <label htmlFor="price">Price</label>
-                <input type="number" id="price" name="price" className="form-input" required={ true } />
-                <label htmlFor="registerDate">Register Date</label>
-                <input type="date" id="registerDate" name="registerDate" className="form-input" required={ true } />
-                <label htmlFor="status">Status</label>
-                <select name="status" className="form-input" required={ true }>
-                    <option value="5 En revisión">En revisión</option>
-                    <option value="6 Autorizado y publicado">Autorizado y publicado</option>
-                    <option value="7 Eliminado">Eliminado</option>
-                    <option value="8 En elaboración">En elaboración</option>
+            formType === "UPDATE_REGISTER" || formType === "NEW_REGISTER" ? 
+            <div className="form-content">
+                <b>{ formType }</b>
+                <p>Please, fill all fields</p>
+                <label htmlFor="cur_url_imagen">Image URL</label>
+                <input type="text" id="cur_url_imagen" name="cur_url_imagen" className="form-input" required={ true } />
+                <label htmlFor="cur_id">ID</label>
+                <input type="text" id="cur_id" name="cur_id" className="form-input" required={ true } />
+                <label htmlFor="cur_nombre">Name</label>
+                <input type="text" id="cur_nombre" name="cur_nombre" className="form-input" maxlength="150" required={ true } />
+                <label htmlFor="cur_precio">Price</label>
+                <input type="number" id="cur_precio" name="cur_precio" className="form-input" min="0" required={ true } />
+                <label htmlFor="cur_fh_reg">Register Date</label>
+                <input type="date" id="cur_fh_reg" name="cur_fh_reg" className="form-input" required={ true } />
+                <label htmlFor="estatus_nombre">Status</label>
+                <select id="estatus_nombre" name="estatus_nombre" className="form-input" required={ true }>
+                    <option value="5-En revisión">En revisión</option>
+                    <option value="6-Autorizado y publicado">Autorizado y publicado</option>
+                    <option value="7-Eliminado">Eliminado</option>
+                    <option value="8-En elaboración">En elaboración</option>
                 </select>
-                <label htmlFor="category">Category</label>
-                <select name="category" className="form-input" required={ true }>
+                <label htmlFor="categ_nombre">Category</label>
+                <select id="categ_nombre" name="categ_nombre" className="form-input" required={ true }>
                     <option value="Bases de datos">Bases de datos</option>
                     <option value="Cultura">Cultura</option>
                     <option value="Deportes">Deportes</option>
                     <option value="Marketing">Marketing</option>
                     <option value="Tecnología">Tecnología</option>
                 </select>
-                <input type="button" id="confirm" className="confirm-button" value="Confirm Operation" />
-                <input type="button" id="cancel" className="cancel-button" value="Cancel Operation" />
-            </>
+                <div className="buttons">
+                    <input type="image" src={ check } alt="Confirm" id="confirm" className="action-button" title="Confirm Operation" />
+                    <input type="image" src={ cross } onClick={ () => { setModal(false) } } alt="Cancel" id="cancel" className="action-button" title="Cancel Operation" />
+                </div>
+            </div>
             :
             <>
-                <h1>Actions to realize</h1>
-                <input type="button" id="confirm" className="confirm-button" value="Confirm Operation" />
-                <input type="button" id="cancel" className="cancel-button" value="Cancel Operation" />
+                <b>{ formType }</b>
+                <div className="buttons">
+                    <input type="image" src={ check } alt="Confirm" id="confirm" className="action-button" title="Confirm Operation" />
+                    <input type="image" src={ cross } alt="Cancel" onClick={ () => { setModal(false) } } id="cancel" className="action-button" title="Cancel Operation" />
+                </div>
             </>
         }
     </form>

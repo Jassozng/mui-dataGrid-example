@@ -5,8 +5,13 @@
     height: 35rem;
     width: 80%;
     margin: 3rem;
-    gap: 1rem;
-    
+    gap: 1rem;   
+}
+
+.top-table-bar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .even {
