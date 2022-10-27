@@ -4,9 +4,9 @@ const handleSubmit = (event, setModal, formType, dispatch, fieldId) => {
         "type": formType,
         "update_field_id": fieldId,
         "payload": {
-            "id": "",
+            "id": fieldId,
             "cur_url_imagen": "",
-            "cur_id": "", 
+            "cur_id": fieldId, 
             "cur_nombre": "", 
             "cur_precio": 0, 
             "cur_fh_reg": "", 
@@ -25,11 +25,11 @@ const handleSubmit = (event, setModal, formType, dispatch, fieldId) => {
             action.payload[event.target[formInput].id] = event.target[formInput].value;
             action.payload["estatus_id"] = event.target["estatus_nombre"].value.split("-")[0];
             action.payload["estatus_nombre"] = event.target["estatus_nombre"].value.split("-")[1];
-            action.payload["id"] = event.target["cur_id"].value;
         }
     }
     try{
         //Dispatch action to reducer
+        console.log(action)
         dispatch(action);
     }finally{
         //Close the ModalDialog
