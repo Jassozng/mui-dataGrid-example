@@ -1,9 +1,13 @@
+import { latestId } from "../../components/DataTable/hooks/getData"
+
 const fetchData = (payload) => {
     return payload;
 }
 
 const newRegister = (state, payload) => {
     const newState = [...state];
+    payload.id = latestId + 1;
+    payload.cur_id = latestId + 1;
     newState.push(payload);
     return newState;
 }

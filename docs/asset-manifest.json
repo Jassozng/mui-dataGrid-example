@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.ecf3bbc2.css",
-    "main.js": "/static/js/main.374ac4bf.js",
+    "main.css": "/static/css/main.ccbef676.css",
+    "main.js": "/static/js/main.554f8ab6.js",
     "static/media/rubbish-delete.svg": "/static/media/rubbish-delete.d13e352644686d78ee6c0bef0e2d7aaa.svg",
     "static/media/edit.svg": "/static/media/edit.94afbd1e33e914f883813e813f9574c5.svg",
     "static/media/arrow-next.svg": "/static/media/arrow-next.5f77078ebd2e46e08a576e5b18bd280c.svg",
@@ -9,11 +9,11 @@
     "static/media/cross.svg": "/static/media/cross.135f8165351030ff4b1a8391dc1f9975.svg",
     "static/media/check.svg": "/static/media/check.aa3e1fbc5f5887740a8619bf0708cf4d.svg",
     "index.html": "/index.html",
-    "main.ecf3bbc2.css.map": "/static/css/main.ecf3bbc2.css.map",
-    "main.374ac4bf.js.map": "/static/js/main.374ac4bf.js.map"
+    "main.ccbef676.css.map": "/static/css/main.ccbef676.css.map",
+    "main.554f8ab6.js.map": "/static/js/main.554f8ab6.js.map"
   },
   "entrypoints": [
-    "static/css/main.ecf3bbc2.css",
-    "static/js/main.374ac4bf.js"
+    "static/css/main.ccbef676.css",
+    "static/js/main.554f8ab6.js"
   ]
 }
