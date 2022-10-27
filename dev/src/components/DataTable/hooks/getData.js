@@ -2,8 +2,6 @@ import axios from "axios"
 import Avatar from "@mui/material/Avatar"
 import ActionsTable from '../../ActionsTable/ActionsTable'
 
-export let latestId = 0;
-
 const axiosPetition = async (dispatch, filter) => {
     axios({
         method: 'post',
@@ -35,7 +33,6 @@ const generateRows = (data, filter) => {
                 categ_nombre: categ_nombre
             }
         );
-        if(cur_id > latestId) latestId = cur_id;
     });
     return rows;
 }
@@ -55,6 +52,14 @@ const generateColumns = (dispatch) => {
       ];
 }
 
+const getLatestId = (data) => {
+    let latestId = 0;
+    data.map((row) => {
+        if(row.cur_id > latestId) latestId = row.cur_id;
+    });
+    return latestId;
+}
+
 const searchByProp = ({ data, prop, propValue }) => {
     data.map((row) => {
         if(row[prop] !== propValue) return
@@ -62,4 +67,4 @@ const searchByProp = ({ data, prop, propValue }) => {
     });
 }
 
-export { axiosPetition, searchByProp, generateColumns };
+export { axiosPetition, searchByProp, generateColumns, getLatestId };
