@@ -2,24 +2,22 @@ import axios from "axios"
 import Avatar from "@mui/material/Avatar"
 import ActionsTable from '../../ActionsTable/ActionsTable'
 
-const axiosPetition = async (dispatch, filter) => {
+const axiosPetition = async (dispatch) => {
     axios({
         method: 'post',
         url: 'https://p9i3ym1dk0.execute-api.us-west-2.amazonaws.com/v0/merlin/query/pub/prueba',
         data: {}
     }).then(response => {
-        const data = generateRows(response.data.result, filter);
+        const data = generateRows(response.data.result, "");
         dispatch({"type": "FETCH_DATA", "payload": data });
     });
-}
+};
 
 const generateRows = (data, filter) => {
     let rows = [];
+    const re = new RegExp(`${filter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}`, "gm");
     data.map(({ cur_id, cur_nombre, cur_precio, cur_fh_reg, estatus_nombre, estatus_id, categ_nombre, cur_url_imagen }) => {
-        if(filter !== ""){
-            const re = new RegExp(`${filter.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()}`, "gm");
-            if(!cur_nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().match(re)) return
-        }
+        if(!cur_nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().match(re)) return
         rows.push(
             { 
                 id: cur_id,
@@ -35,10 +33,9 @@ const generateRows = (data, filter) => {
         );
     });
     return rows;
-}
+};
 
 const generateColumns = (dispatch) => {
-
     return [
         { field: 'cur_url_imagen', headerName: 'Image', renderCell: (avatarSrc) => { return ( <><Avatar src={ avatarSrc.formattedValue } /></> ); }, width: 150 },
         { field: 'cur_id', headerName: 'ID', width: 150 },
@@ -50,7 +47,7 @@ const generateColumns = (dispatch) => {
         { field: 'categ_nombre', headerName: 'Category', width: 150 },
         { field: 'actions', headerName: 'Actions', renderCell: (params) => { return ( <ActionsTable dispatch={ dispatch } rowData = { params.row } /> ); }, width: 150 }
       ];
-}
+};
 
 const getLatestId = (data) => {
     let latestId = 0;
@@ -58,13 +55,6 @@ const getLatestId = (data) => {
         if(row.cur_id > latestId) latestId = row.cur_id;
     });
     return latestId;
-}
+};
 
-const searchByProp = ({ data, prop, propValue }) => {
-    data.map((row) => {
-        if(row[prop] !== propValue) return
-        return row[prop];
-    });
-}
-
-export { axiosPetition, searchByProp, generateColumns, getLatestId };
+export { axiosPetition, generateRows, generateColumns, getLatestId };

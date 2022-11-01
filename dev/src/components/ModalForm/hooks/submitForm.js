@@ -16,7 +16,7 @@ const handleSubmit = (event, setModal, formType, dispatch, fieldId) => {
         }
     }
 
-    if(formType == "UPDATE_REGISTER" || formType == "NEW_REGISTER"){
+    if(formType === "UPDATE_REGISTER" || formType === "NEW_REGISTER"){
         for(let formInput in event.target){
             //Form sends a lot of keys in event obj, here we filter for only number keys that have the form input values
             const numberRegex = new RegExp(/^\d/);
@@ -29,7 +29,6 @@ const handleSubmit = (event, setModal, formType, dispatch, fieldId) => {
     }
     try{
         //Dispatch action to reducer
-        console.log(action)
         dispatch(action);
     }finally{
         //Close the ModalDialog

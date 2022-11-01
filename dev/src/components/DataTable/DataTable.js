@@ -4,16 +4,16 @@ import { DataGrid } from '@mui/x-data-grid'
 import TextField from "@mui/material/TextField"
 import { React, useState, useReducer } from 'react'
 import ModalDialog from '../ModalDialog/ModalDialog.js'
-import { axiosPetition, generateColumns } from "./hooks/getData.js"
+import { axiosPetition, generateColumns, generateRows } from "./hooks/getData.js"
 import tableReducers from '../../reducers/TableReducers/tableReducers.js'
 
 const DataTable = () => {
   const [state, dispatch] = useReducer(tableReducers, []);
-  const [search, setSearch] = useState("");
+  const [searchState, setSearchState] = useState([]);
   const [modal, setModal] = useState(false);
   let columns = generateColumns(dispatch);
 
-  if(state.length === 0) axiosPetition(dispatch, "");
+  if(state.length === 0) axiosPetition(dispatch);
 
   return (
     <div className="dataGrid">
@@ -23,8 +23,7 @@ const DataTable = () => {
           id="search-bar"
           className="textField"
           onInput={(e) => {
-            setSearch(e.target.value);
-            axiosPetition(dispatch, e.target.value);
+            e.target.value !== "" ? setSearchState(generateRows(state, e.target.value)) : setSearchState([]);
           }}
           label="Search by name 🔎"
           variant="outlined"
@@ -33,9 +32,9 @@ const DataTable = () => {
         />
         <input type="image" src={ add } alt="New Register" className="action-button" title="New Register" onClick={ () => { setModal(true) } } />
       </div>
-      <DataGrid rows={ state } columns={ columns } getRowClassName={(params) => params.id % 2 === 0 ? 'even' : 'odd' } />
+      <DataGrid rows={ searchState.length === 0 ? state : searchState } columns={ columns } getRowClassName={(params) => params.id % 2 === 0 ? 'even' : 'odd' } />
     </div>
-  )
-}
+  );
+};
 
 export default DataTable
